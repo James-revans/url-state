@@ -37,7 +37,7 @@
     "dependencies": {
         "sms-plugin---components": "^1.0.1",
         "sms-plugin---logger": "^1.0.1",
-        "sms-plugin---url-state": "^1.0.1",
+        "sms-plugin---url-state": "^1.0.3",
         "state-machine-snacks": "^1.0.5",
         "svelte": "^3.42.6",
         "xstate": "^4.23.1"

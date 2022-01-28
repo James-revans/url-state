@@ -1,11 +1,5 @@
-<style lang="scss">
-@import "editor";
-</style>
-
-<input type="text" class="name" placeholder="Name..." bind:value="{data.name}"/>
-<textarea class="data" placeholder="Type here..." bind:value="{data.note}"></textarea>
-
 <script>
+import { onMount } from "svelte";
 import service from "/src/service.js";
 
 const data = {
@@ -13,10 +7,10 @@ const data = {
     note : "",
 };
 
-$: service.send({
-    type : "plugin:url-context:UPDATE",
-    data,
-});
+// $: service.send({
+//     type : "plugin:url-context:UPDATE",
+//     data,
+// });
 
 $: ({
     decoded,
@@ -29,4 +23,52 @@ $: if(!data.name && decoded.name) {
 $: if(!data.note && decoded.note) {
     data.note = decoded.note;
 }
+
+let editor;
+  
+  export let toolbarOptions = [
+      [{ header: 1 }, { header: 2 }, "blockquote", "link", "image", "video"],
+      ["bold", "italic", "underline", "strike"],
+      [{ list: "ordered" }, { list: "ordered" }],
+      [{ align: [] }],
+      ["clean"]
+  ];
+  
+onMount(async () => {
+      const { default: Quill } = await import("quill");
+  
+    let quill = new Quill(editor, {
+        modules: {
+        toolbar: toolbarOptions
+        },
+        theme: "snow",
+        placeholder: "Write your story..."
+    });
+
+    quill.setContents(decoded.note);
+
+    quill.on('text-change', function(delta, oldDelta, source) {
+        if (source == 'api') {
+            console.log("An API call triggered this change.");
+        } else if (source == 'user') {
+            data.note = quill.getContents();
+            console.log(data.note);
+            service.send({
+                type : "plugin:url-context:UPDATE",
+                data,
+            });
+        }
+    });
+});
+
 </script>
+
+<style lang="scss">
+    @import "editor";
+    @import 'https://cdn.quilljs.com/1.3.6/quill.snow.css';
+</style>
+
+<div class="editor-wrapper">
+    <div bind:this={editor} />
+</div>
+

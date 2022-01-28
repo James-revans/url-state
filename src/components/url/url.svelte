@@ -1,3 +1,20 @@
+<script>
+import service from "/src/service.js";
+$: url = window.location.href;
+let showCopied;
+
+
+const handleCopyURL = () => {
+    navigator.clipboard.writeText(window.location.href);
+    showCopied = true;
+
+    setTimeout(() => {
+        showCopied = false;
+    }, 2000);
+};
+
+</script>
+
 <style lang="scss">
 @import "url";
 </style>
@@ -15,9 +32,4 @@
     </button>
 </div>
 
-<script>
-import service from "/src/service.js";
-
-const handleCopyURL = () => null;
-const url = "flems.io/#0=N4IgZglgNgpgziAXAbVAOwIYFsZJAOgAsAXLKEAGhAGMB7NYmBvEAXwvW10QICsEqdBk2J4BIODFjViEegh4AGRAEY2HEJhx581OOKGNmPNgF1WQA";
-</script>
+<div class="copied text-dark" class:show="{showCopied}">Copied to clipboard!</div>

@@ -49,10 +49,8 @@ onMount(async () => {
 
     quill.on('text-change', function(delta, oldDelta, source) {
         if (source == 'api') {
-            console.log("An API call triggered this change.");
         } else if (source == 'user') {
             data.note = quill.getContents();
-            console.log(data.note);
             service.send({
                 type : "plugin:url-context:UPDATE",
                 data,
@@ -64,10 +62,10 @@ onMount(async () => {
 </script>
 
 <style lang="scss">
-    @import "editor";
     @import 'https://cdn.quilljs.com/1.3.6/quill.snow.css';
+    @import "editor";
 </style>
-
+ 
 <div class="editor-wrapper">
     <div bind:this={editor} />
 </div>

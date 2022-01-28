@@ -1,0 +1,20 @@
+.ql-editor.ql-blank::before {
+    color: silver;
+}
+.ql-snow .ql-fill {
+    fill: silver;
+    
+}
+
+.ql-snow .ql-fill, .ql-snow .ql-stroke.ql-fill {
+    fill: silver;
+    stroke: silver;
+}
+
+.ql-snow .ql-stroke {
+    stroke: silver;
+}
+
+.ql-container {
+    font-size: 16px;
+}

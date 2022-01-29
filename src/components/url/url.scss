@@ -27,6 +27,11 @@ button {
     font-size: 1rem;
     &:hover {
         cursor: pointer;
+        color: orange;
+    }
+    &:hover svg {
+        fill: orange;
+        stroke: orange;   
     }
 }
 

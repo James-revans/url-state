@@ -1,8 +1,6 @@
 <script>
-import service from "/src/service.js";
 $: url = window.location.href;
 let showCopied;
-
 
 const handleCopyURL = () => {
     navigator.clipboard.writeText(window.location.href);

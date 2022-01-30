@@ -3,6 +3,15 @@ import { onMount } from "svelte";
 import service from "/src/service.js";
 
 let editor;
+
+const data = {
+    name : "",
+    note : "",
+};
+
+$: ({
+    decoded,
+} = $service.context);
   
 const toolbarOptions = [
     [{ header: 1 }, { header: 2 }, "blockquote", "link", "image", "video"],
@@ -11,7 +20,7 @@ const toolbarOptions = [
     [{ align: [] }],
     ["clean"]
 ];
-  
+
 onMount(async () => {
       const { default: Quill } = await import("quill");
   
@@ -24,6 +33,7 @@ onMount(async () => {
     });
 
     quill.setContents(decoded.note);
+    data.name = decoded.name;
 
     quill.on('text-change', function(delta, oldDelta, source) {
         if (source == 'api') {

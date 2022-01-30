@@ -1,3 +1,9 @@
+<script>
+    import URLShareBar from "./url/url.svelte";
+    import TabBar from "./tab-bar/tab-bar.svelte";
+    import TabView from "./tab-view/tab-view.svelte";
+</script>
+
 <style>
     .app {
         display: flex;
@@ -8,8 +14,7 @@
     .content {
         position: relative;
         width: 100%;
-        max-width: 800px;
-        height: 100vh;
+        min-height: 100vh;
         overflow-x: hidden;
     }
 </style>
@@ -17,11 +22,7 @@
 <div class="app">
     <div class="content">
         <URLShareBar />
-        <Editor />
+        <TabBar tabs={[ "Type", "Draw" ]}/>
+        <TabView />
     </div>
 </div>
-
-<script>
-    import URLShareBar from "./url/url.svelte";
-    import Editor from "./editor/editor.svelte";
-</script>

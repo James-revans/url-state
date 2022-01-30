@@ -1,11 +1,17 @@
+.url-wrapper {
+    position: relative;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
 .url-share-bar {
     position: relative;
     display: flex;
     width: 100%;
     justify-content: space-between;
     padding: 0 1rem;
-    margin: 1rem 0;
-    background: #000;
+    margin: 1rem auto;
+    background: var(--color-black);
     border-radius: 1rem;
     white-space: nowrap;
 }
@@ -13,7 +19,7 @@
 p {
     overflow: hidden;
     max-width: 80%;
-    color: orange;
+    color: var(--color-orange);
     text-overflow: ellipsis;
 }
 
@@ -27,11 +33,11 @@ button {
     font-size: 1rem;
     &:hover {
         cursor: pointer;
-        color: orange;
+        color: var(--color-orange);
     }
     &:hover svg {
-        fill: orange;
-        stroke: orange;   
+        fill: var(--color-orange);
+        stroke: var(--color-orange);   
     }
 }
 

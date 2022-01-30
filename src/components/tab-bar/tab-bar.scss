@@ -1,0 +1,22 @@
+.tab-bar {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+button {
+    background-color: var(--color-black);
+    border-radius: 0.5rem;
+    border-color: transparent;
+    color: silver;
+    padding: 0.5rem 1rem;
+    font-size: large;
+    &:hover {
+        cursor: pointer; 
+        color: var(--color-orange);
+    }
+}
+.active {
+    color: var(--color-orange);
+}

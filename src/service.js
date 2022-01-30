@@ -11,7 +11,7 @@ const service = sms({
 
     plugins : [
         components(),
-        logger(),
+        // logger(), logs state changes, commenting for prod
         urlState(),
     ],
 });

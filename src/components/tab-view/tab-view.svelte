@@ -9,7 +9,6 @@ let currentView = "Text";
 onMount(() => {
     tabView.subscribe((value) => {
         currentView = value;
-        console.log(value);
     });
 });
 

@@ -4,17 +4,12 @@ import service from "/src/service.js";
 
 let editor;
 
-const data = {
-    name : "",
-    note : "",
-};
-
 $: ({
     decoded,
 } = $service.context);
   
 const toolbarOptions = [
-    [{ header: 1 }, { header: 2 }, "blockquote", "link", "image", "video"],
+    [{ header: 1 }, { header: 2 }, "blockquote", "link"],
     ["bold", "italic", "underline", "strike"],
     [{ list: "ordered" }, { list: "ordered" }],
     [{ align: [] }],
@@ -33,12 +28,14 @@ onMount(async () => {
     });
 
     quill.setContents(decoded.note);
-    data.name = decoded.name;
 
     quill.on('text-change', function(delta, oldDelta, source) {
         if (source == 'api') {
         } else if (source == 'user') {
-            data.note = quill.getContents();
+            const data = {
+                ...decoded,
+                note: quill.getContents()
+            }
             service.send({
                 type : "plugin:url-context:UPDATE",
                 data,

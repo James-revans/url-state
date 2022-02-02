@@ -1,7 +1,7 @@
 import { writable } from "svelte/store";
 
-const tabView = writable("Type");
+const tab = writable("Type");
 
 export {
-    tabView,
+    tab,
 };

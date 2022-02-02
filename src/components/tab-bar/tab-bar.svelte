@@ -1,13 +1,31 @@
 <script>
-import { tabView } from "/src/stores";
+import { tab } from "/src/stores";
 import { onMount } from "svelte";
+import service from "/src/service.js";
+
+$: ({
+    decoded,
+} = $service.context);
    
 export let tabs;
 let currentView;
 
 onMount(() => {
-    tabView.subscribe((val) => {
+    if(decoded.tab) {
+        tab.set(decoded.tab);
+    }
+
+    tab.subscribe((val) => {
         currentView = val;
+        const data = {
+            ...decoded,
+            tab  : val,
+        };
+
+        service.send({
+            type : "plugin:url-context:UPDATE",
+            data,
+        });
     });
 });
 </script>
@@ -17,9 +35,9 @@ onMount(() => {
 </style>
 
 <div class="tab-bar">
-    {#each tabs as tab}
-    <button on:click={() => tabView.set(tab)} class:active={currentView === tab}>
-        {tab}
+    {#each tabs as tabView}
+    <button on:click={() => tab.set(tabView)} class:active={currentView === tabView}>
+        {tabView}
     </button>
     {/each}
 </div>

@@ -2,13 +2,13 @@
 import Editor from "../editor/editor.svelte";
 import Draw from "../draw/draw.svelte";
 import { onMount } from "svelte";
-import { tabView } from "/src/stores";
+import { tab } from "/src/stores";
 
-let currentView = "Text";
+let currentView = "Type";
 
 onMount(() => {
-    tabView.subscribe((value) => {
-        currentView = value;
+    tab.subscribe((val) => {
+        currentView = val;
     });
 });
 

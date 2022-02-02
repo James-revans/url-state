@@ -6,17 +6,14 @@ import service from "/src/service.js";
 import debounce from "/src/util/debounce";
 import "excalidraw/dist/excalidraw.min.css";
 
-const data = {
-    name : "",
-    note : "",
-};
-let width = window.innerWidth;
-let height = window.innerHeight;
-const options = { zenModeEnabled : true, viewBackgroundColor : "white" };
-
 $: ({
     decoded,
 } = $service.context);
+
+const options = { zenModeEnabled : true, viewBackgroundColor : "white" };
+
+let width = window.innerWidth;
+let height = window.innerHeight;
 
 const onResize = () => {
     width = window.innerWidth;
@@ -25,11 +22,14 @@ const onResize = () => {
 
 onMount(() => {
     window.addEventListener("resize", onResize);
-    data.note = decoded.note;
 });
 
 const onChange = debounce((elements, state) => {
-    data.name = elements;
+    const data = {
+        ...decoded,
+        draw : elements,
+    };
+
     service.send({
         type : "plugin:url-context:UPDATE",
         data,
@@ -46,7 +46,7 @@ const onChange = debounce((elements, state) => {
         this={Excalidraw}
         width={width}
         height={height}
-        initialData={decoded.name}
+        initialData={decoded.draw}
         onChange={onChange}
         options={options}
     />
